@@ -2,8 +2,8 @@ import numpy as np, cv2, os
 import tensorflow as tf
 import pathlib
 
-train_dir = pathlib.Path("faces/train")
-test_dir = pathlib.Path("faces/test")
+train_dir = pathlib.Path("face/train")
+test_dir = pathlib.Path("face/test")
 
 batch_size = 32
 img_height = 180
@@ -36,13 +36,24 @@ num_classes = 3
 model = tf.keras.Sequential([  # 학습모델 생성및 레이어 추가
   tf.keras.layers.experimental.preprocessing.Rescaling(1./255),
   tf.keras.layers.Conv2D(32, 3, activation='relu'),
-  tf.keras.layers.MaxPooling2D(),
   tf.keras.layers.Conv2D(32, 3, activation='relu'),
   tf.keras.layers.MaxPooling2D(),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.MaxPooling2D(),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.MaxPooling2D(),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.MaxPooling2D(),
+  tf.keras.layers.Conv2D(32, 3, activation='relu'),
   tf.keras.layers.Conv2D(32, 3, activation='relu'),
   tf.keras.layers.MaxPooling2D(),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),
+  tf.keras.layers.Dense(64, activation='relu'),
+  tf.keras.layers.Dense(32, activation='relu'),
   tf.keras.layers.Dense(num_classes)
 ])
 
